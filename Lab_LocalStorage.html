@@ -70,7 +70,7 @@ fieldset .submit {
 	<H1>實作 HTML5 的 LocalStorage 功能</H1>
 	<p>輸入表單資料，不要按下「Send」送出，關閉瀏覽器，然後重新回到本頁，自動回復先前輸入的內容。</p>
 
-	<form method="post" action="http://exec.hostzi.com/echo.php">
+	<form method="post" action="https://tw.yahoo.com">
 
 		<fieldset>
 			<legend>Contact Details</legend>
@@ -91,6 +91,35 @@ fieldset .submit {
 	</form>
 
 <span id="test"></span>
+
+
+<script>
+	function doChange() {
+	//在 id = "test" 處，顯示name + value	
+	document.getElementById("test").innerHTML += this.name + ":" + this.value + "<br>";
+	//將name + value吋儲存到localStorage
+	localStorage.setItem(this.name, this.value);               
+	}
+	//開啟網頁時，比對id，讀取對應的locaStorage資料，並顯示
+	function readAndShow() {
+		if (localStorage["txtName"])
+			document.getElementById("txtName").value = localStorage["txtName"];
+		if (localStorage["txtEmail"])
+			document.getElementById("txtEmail").value = localStorage["txtEmail"];
+		if (localStorage["txtPhone"])
+			document.getElementById("txtPhone").value = localStorage["txtPhone"];
+	}
+	
+	window.onload = readAndShow;
+	// 在各視窗放開按鍵時，做ㄎdochange
+	document.getElementById("txtName").onkeyup = doChange;
+	document.getElementById("txtEmail").onkeyup = doChange;
+	document.getElementById("txtPhone").onkeyup = doChange;
+	
+	document.forms[0].onsubmit = function () { localStorage.clear(); };
+	
+</script>
+
 
 
 </body>
